@@ -1,0 +1,134 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(App());
+}
+
+class App extends StatelessWidget {
+  const App({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: MyApp(),
+    );
+  }
+}
+
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  String Sum = "";
+  String txt1 = "";
+  String txt2 = "";
+
+  @override
+  Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          "Sum",
+          style: TextStyle(
+              color: Color.fromARGB(255, 255, 255, 255),
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
+      ),
+      body: Container(
+        alignment: Alignment.center,
+        child: ListView(
+          children: [
+            SizedBox(
+              height: height * 0.06,
+            ),
+            Container(
+              margin: EdgeInsets.only(left: width * 0.07, right: width * 0.07),
+              child: TextField(
+                keyboardType: TextInputType.number,
+                onChanged: (value) {
+                  setState(() {
+                    txt1 = value;
+                  });
+                },
+                decoration: const InputDecoration(
+                  labelText: "Enter The Number",
+                  labelStyle: TextStyle(color: Colors.grey, fontSize: 15.0),
+                  border: OutlineInputBorder(),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: height * 0.02,
+            ),
+            Container(
+              margin: EdgeInsets.only(left: width * 0.07, right: width * 0.07),
+              child: TextField(
+                keyboardType: TextInputType.number,
+                onChanged: (value) {
+                  setState(() {
+                    txt2 = value;
+                  });
+                },
+                decoration: InputDecoration(
+                  labelText: "Enter The Number",
+                  labelStyle: TextStyle(color: Colors.grey, fontSize: 15.0),
+                  border: OutlineInputBorder(),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: height * 0.01,
+            ),
+            Container(
+              margin: EdgeInsets.only(left: width * 0.07, right: width * 0.07),
+              child: ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    _addition();
+                  });
+                  debugPrint('button was clicked');
+                },
+                child: const Text(
+                  "Submit",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 15.0,
+                  ),
+                ),
+              ),
+            ),
+            Text(
+              "$Sum",
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(
+              height: height * 0.01,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  _addition() {
+    var t1 = int.parse(txt1);
+    var t2 = int.parse(txt2);
+
+    int sum = t1 + t2;
+    Sum = sum.toString();
+  }
+}
