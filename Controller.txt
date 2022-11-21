@@ -1,0 +1,57 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyWidget());
+}
+
+class MyWidget extends StatefulWidget {
+  const MyWidget({super.key});
+
+  @override
+  State<MyWidget> createState() => _MyWidgetState();
+}
+
+class _MyWidgetState extends State<MyWidget> {
+  TextEditingController txt1 = TextEditingController();
+  String myText = "";
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      home: Scaffold(
+          appBar: AppBar(
+            title: const Text('Flutter Demo'),
+          ),
+          body: Column(
+            children: [
+              const Text(
+                'Flutter App',
+                style: TextStyle(fontSize: 25),
+              ),
+              TextField(
+                decoration: const InputDecoration(
+                  labelText: 'Enter your name',
+                ),
+                controller: txt1,
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    _showContent();
+                  },
+                  child: const Text('Click me')),
+              Text(
+                myText,
+                style: const TextStyle(fontSize: 25),
+              ),
+            ],
+          )),
+    );
+  }
+
+  void _showContent() {
+    print("Text is ${txt1.text}");
+    setState(() {
+      myText = txt1.text;
+    });
+  }
+}
